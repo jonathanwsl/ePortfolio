@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonathan Wong — AI Transformation Consulting, Readiness to Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0B0D;
+    --panel:#17171B;
+    --line: rgba(255,255,255,0.09);
+    --text:#F4F3EF;
+    --text-dim:#9A9AA1;
+    --ai:#52D9C4;
+    --human:#D9302E;
+    --human-dim: rgba(217,48,46,0.12);
+    --serif:'IBM Plex Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--serif);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--human); color:#fff; }
+  a{ color:inherit; }
+
+  .container{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* NAV */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,11,13,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav__inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:1040px; margin:0 auto;
+  }
+  .nav__name{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .nav__links{
+    display:flex; gap:24px;
+    list-style:none; margin:0; padding:0;
+  }
+  .nav__links a{
+    font-size:13px;
+    text-decoration:none;
+    color:var(--text-dim);
+    transition:color .15s ease;
+  }
+  .nav__links a:hover, .nav__links a:focus-visible{ color:var(--text); }
+  @media (max-width:760px){ .nav__links{ display:none; } }
+
+  /* HERO */
+  .hero{
+    padding:88px 0 96px;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin:0 0 22px;
+  }
+  .hero__title{
+    font-size:clamp(34px, 6vw, 64px);
+    font-weight:700;
+    line-height:1.16;
+    margin:0 0 28px;
+    letter-spacing:-0.01em;
+  }
+  .hero__title .ai-line{ color:var(--ai); }
+  .hero__title .human-line{ color:var(--human); }
+  .hero__sub{
+    font-size:18px;
+    color:var(--text-dim);
+    max-width:620px;
+    margin:0 0 36px;
+  }
+  .hero__byline{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--text-dim);
+    margin:0 0 36px;
+  }
+  .hero__byline strong{ color:var(--text); font-weight:500; }
+
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--mono);
+    font-size:13px;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:3px;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .btn--primary{
+    background:var(--text);
+    color:var(--bg);
+    border:1px solid var(--text);
+  }
+  .btn--primary:hover{ transform:translateY(-1px); }
+  .btn--ghost{
+    background:transparent;
+    color:var(--text);
+    border:1px solid var(--line);
+  }
+  .btn--ghost:hover{ border-color:var(--text-dim); transform:translateY(-1px); }
+
+  /* SECTION SHELL */
+  .section{
+    padding:80px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section__head{ max-width:680px; margin-bottom:40px; }
+  .section__head h2{
+    font-size:clamp(26px, 4vw, 38px);
+    font-weight:600;
+    line-height:1.25;
+    margin:0 0 16px;
+    letter-spacing:-0.005em;
+  }
+  .section__head p{
+    color:var(--text-dim);
+    font-size:16px;
+    margin:0 0 12px;
+  }
+  .section__head p:last-child{ margin-bottom:0; }
+
+  /* FOUR CHAPTERS */
+  .chapter{
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:var(--panel);
+    padding:24px 26px;
+    margin-bottom:14px;
+  }
+  .chapter:last-child{ margin-bottom:0; }
+  .chapter__meta{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--text-dim);
+    margin:0 0 8px;
+  }
+  .chapter__title{
+    font-size:19px;
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  .chapter__ai, .chapter__human, .chapter__proof{
+    font-size:14px;
+    color:var(--text-dim);
+    margin:0 0 8px;
+    line-height:1.6;
+  }
+  .chapter__ai:last-child, .chapter__human:last-child, .chapter__proof:last-child{ margin-bottom:0; }
+  .chapter__tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:500;
+    margin-right:8px;
+  }
+  .chapter__ai .chapter__tag{ color:var(--ai); }
+  .chapter__human .chapter__tag{ color:var(--human); }
+  .chapter__num{
+    font-family:var(--mono);
+    font-weight:600;
+    color:var(--text);
+  }
+  .chapters-close{
+    font-size:15px;
+    font-style:italic;
+    color:var(--text-dim);
+    margin:18px 0 0;
+  }
+
+  /* HOW I WORK — STAGES */
+  .stages{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    margin:32px 0;
+  }
+  .stage{
+    background:var(--panel);
+    padding:24px 24px;
+  }
+  .stage__num{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.12em;
+    color:var(--ai);
+    margin:0 0 10px;
+  }
+  .stage__title{
+    font-size:16px;
+    font-weight:600;
+    margin:0 0 10px;
+  }
+  .stage__desc{
+    font-size:14px;
+    color:var(--text-dim);
+    margin:0;
+  }
+  @media (max-width:760px){ .stages{ grid-template-columns:1fr; } }
+
+  .rule-box{
+    border:1px solid var(--human);
+    background:var(--human-dim);
+    border-radius:4px;
+    padding:26px 28px;
+  }
+  .rule-box__label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--human);
+    margin:0 0 10px;
+  }
+  .rule-box p{
+    font-size:16px;
+    margin:0;
+    color:var(--text);
+  }
+
+  /* FLAGSHIP PROGRAMME */
+  .prog-meta{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.06em;
+    color:var(--text-dim);
+    margin:-6px 0 28px;
+  }
+  .prog-meta span{ color:var(--text); }
+
+  .track-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin:36px 0 56px;
+  }
+  .track{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px 24px;
+    background:var(--panel);
+  }
+  .track__title{ font-size:14px; font-weight:600; margin:0 0 4px; }
+  .track__count{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    margin:0 0 16px;
+  }
+  .track__list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .track__list li{ display:flex; gap:12px; font-size:14px; color:var(--text-dim); }
+  .track__num{ font-family:var(--mono); font-size:12px; color:var(--text); flex-shrink:0; padding-top:1px; }
+  @media (max-width:760px){ .track-cols{ grid-template-columns:1fr; } }
+
+  .module{
+    border:1px solid var(--line);
+    border-radius:4px;
+    background:var(--panel);
+    margin-bottom:18px;
+    overflow:hidden;
+  }
+  .module__head{ padding:22px 26px 16px; border-bottom:1px solid var(--line); }
+  .module__tag{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--text-dim); margin:0 0 8px;
+  }
+  .module__title{ font-size:18px; font-weight:600; margin:0 0 8px; }
+  .module__tagline{ font-size:14px; font-style:italic; color:var(--text-dim); margin:0; }
+  .module__grid{ display:grid; grid-template-columns:1fr 1fr; }
+  .module__col{ padding:20px 26px; }
+  .module__col--ai{ border-right:1px solid var(--line); border-left:3px solid var(--ai); }
+  .module__col--human{ border-left:3px solid var(--human); }
+  .module__col-label{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.14em;
+    text-transform:uppercase; margin:0 0 10px;
+  }
+  .module__col--ai .module__col-label{ color:var(--ai); }
+  .module__col--human .module__col-label{ color:var(--human); }
+  .module__col p{ font-size:14px; color:var(--text-dim); margin:0; }
+  @media (max-width:760px){
+    .module__grid{ grid-template-columns:1fr; }
+    .module__col--ai{ border-right:none; border-bottom:1px solid var(--line); }
+  }
+
+  .index{ margin-top:8px; border:1px solid var(--line); border-radius:4px; overflow:hidden; }
+  .index__row{
+    display:grid; grid-template-columns:48px 1fr 70px; gap:16px; align-items:center;
+    padding:13px 22px; border-bottom:1px solid var(--line); font-size:13px;
+  }
+  .index__row:last-child{ border-bottom:none; }
+  .index__row.is-detailed{ background:var(--panel); }
+  .index__num{ font-family:var(--mono); color:var(--text-dim); }
+  .index__title{ color:var(--text); }
+  .index__hours{ font-family:var(--mono); color:var(--text-dim); text-align:right; }
+
+  .series{ margin-top:8px; }
+  .series__item{
+    border:1px solid var(--line); border-radius:4px; background:var(--panel);
+    padding:16px 22px; margin-bottom:10px;
+  }
+  .series__item:last-child{ margin-bottom:0; }
+  .series__item-title{ font-size:14px; font-weight:600; margin:0; }
+  .series__item-desc{ font-size:13px; color:var(--text-dim); margin:8px 0 0; }
+  .series__tag{
+    font-family:var(--mono); font-size:11px; font-weight:400; color:var(--ai);
+    text-transform:uppercase; letter-spacing:0.08em;
+  }
+
+  /* CREDENTIALS */
+  .cred-block{ margin-bottom:36px; }
+  .cred-block:last-child{ margin-bottom:0; }
+  .cred-block__label{
+    font-family:var(--mono); font-size:11px; letter-spacing:0.16em;
+    text-transform:uppercase; color:var(--text-dim); margin:0 0 16px;
+  }
+  .cred-item{
+    border:1px solid var(--line); border-radius:4px; background:var(--panel);
+    padding:18px 22px; margin-bottom:10px;
+  }
+  .cred-item:last-child{ margin-bottom:0; }
+  .cred-item__title{ font-size:15px; font-weight:600; margin:0 0 4px; }
+  .cred-item__meta{ font-size:13px; color:var(--text-dim); margin:0; }
+  .cred-item__status{
+    display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ai); border:1px solid var(--ai);
+    border-radius:2px; padding:2px 8px; margin-left:10px; vertical-align:middle;
+  }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:8px; }
+  .pill{
+    font-family:var(--mono); font-size:12px; border:1px solid var(--line);
+    border-radius:3px; padding:8px 14px; color:var(--text-dim);
+  }
+
+  /* CONTACT */
+  .contact{ padding:80px 0 100px; }
+  .contact h2{
+    font-size:clamp(26px, 4.4vw, 42px); font-weight:600; line-height:1.25;
+    max-width:22ch; margin:0 0 20px;
+  }
+  .contact p{ color:var(--text-dim); font-size:16px; max-width:580px; margin:0 0 36px; }
+  .contact-grid{ display:grid; grid-template-columns:repeat(3, auto); gap:32px; font-family:var(--mono); font-size:13px; }
+  .contact-grid a{ text-decoration:none; }
+  .contact-grid a:hover{ color:var(--ai); }
+  .contact-grid dt{ color:var(--text-dim); text-transform:uppercase; letter-spacing:0.1em; font-size:10px; margin:0 0 6px; }
+  .contact-grid dd{ margin:0; }
+  @media (max-width:760px){ .contact-grid{ grid-template-columns:1fr; gap:20px; } }
+
+  footer.container{
+    padding:28px 28px 40px;
+    font-family:var(--mono); font-size:12px; color:var(--text-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__name">Jonathan Wong</div>
+    <ul class="nav__links">
+      <li><a href="#track-record">Track Record</a></li>
+      <li><a href="#how-i-work">How I Work</a></li>
+      <li><a href="#programme">Programme</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">AI Transformation Consulting — APAC</p>
+      <h1 class="hero__title">
+        <span class="ai-line">AI drafts.</span>
+        <span class="human-line">People decide.</span>
+      </h1>
+      <p class="hero__sub">
+        I help organisations solve real problems with AI — from readiness assessment through to
+        job redesign. Fifteen years in digital transformation, the last five specifically in AI,
+        with the track record to show it.
+      </p>
+      <p class="hero__byline">
+        <strong>Jonathan Wong</strong> · Co-founder, LIVO · 15+ years digital transformation, 5+ in AI · Singapore
+      </p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="#track-record">See the track record</a>
+        <a class="btn btn--ghost" href="#contact">Start a conversation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRACK RECORD — FOUR CHAPTERS -->
+  <section class="section reveal" id="track-record">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Track Record</p>
+        <h2>Four chapters, one rule.</h2>
+        <p>
+          Fifteen years in digital transformation — the last five specifically in AI. The four
+          chapters below cover the most recent twelve, across four industries and four different
+          AI capabilities. The constant throughout: AI drafts the work, people make the call.
+        </p>
+      </div>
+
+      <div class="chapter">
+        <p class="chapter__meta">01 · 2013–2019 · ChyronHego</p>
+        <h3 class="chapter__title">Real-Time Sports Analytics</h3>
+        <p class="chapter__ai"><span class="chapter__tag">AI</span>Real-time player tracking generated the data layer for live sports analytics broadcasts.</p>
+        <p class="chapter__proof"><span class="chapter__num">7.5×</span> revenue growth — US$600K → US$4.5M across 8+ APAC markets.</p>
+        <p class="chapter__human"><span class="chapter__tag">Human call</span>Analysts and broadcasters decided which signals told the story.</p>
+      </div>
+
+      <div class="chapter">
+        <p class="chapter__meta">02 · 2019–2021 · BTI Studios</p>
+        <h3 class="chapter__title">AI-Powered Localisation</h3>
+        <p class="chapter__ai"><span class="chapter__tag">AI</span>NLP-driven subtitling cut localisation costs at scale.</p>
+        <p class="chapter__proof"><span class="chapter__num">US$6M ARR</span> agreement with a major Hong Kong media group, underpinned by the AI/NLP localisation model.</p>
+        <p class="chapter__proof"><span class="chapter__num">US$12M → US$60M</span> — post-merger operations scaled across 10 APAC markets.</p>
+        <p class="chapter__human"><span class="chapter__tag">Human call</span>Editors made the cultural and contextual accuracy call AI couldn't.</p>
+      </div>
+
+      <div class="chapter">
+        <p class="chapter__meta">03 · 2022–2024 · Vizrt</p>
+        <h3 class="chapter__title">Virtual Production</h3>
+        <p class="chapter__ai"><span class="chapter__tag">AI</span>AI-driven virtual sets brought realism to live broadcasts at scale.</p>
+        <p class="chapter__proof"><span class="chapter__num">8% ARR growth</span> through an on-premises to cloud-native migration for a leading national broadcaster.</p>
+        <p class="chapter__human"><span class="chapter__tag">Human call</span>Directors made the creative call on what "realistic" meant for each broadcast.</p>
+      </div>
+
+      <div class="chapter">
+        <p class="chapter__meta">04 · 2025–Present · LIVO + SMF</p>
+        <h3 class="chapter__title">AI-Augmented Sales Enablement</h3>
+        <p class="chapter__ai"><span class="chapter__tag">AI</span>Generative AI drafts account research, proposals and renewal briefs for B2B sales teams.</p>
+        <p class="chapter__proof"><span class="chapter__num">350+</span> professionals through AI-adoption programmes with SMF, WSG, e2i and Singapore's Polytechnics.</p>
+        <p class="chapter__human"><span class="chapter__tag">Human call</span>The sales rep makes the call that closes the deal.</p>
+      </div>
+
+      <p class="chapters-close">AI drafts. People decide. Twelve years before it had a name — now it's the practice.</p>
+    </div>
+  </section>
+
+  <!-- HOW I WORK -->
+  <section class="section reveal" id="how-i-work">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">How I Work</p>
+        <h2>From transformation to consultancy.</h2>
+        <p>
+          Every AI or digital transformation eventually arrives at the same question: are the
+          people doing the work ready for it, equipped for it, and is the work itself still
+          structured right? Fifteen years on the technology side of that question means I've
+          watched it get asked — and answered badly — more times than I can count. Learning
+          consultancy is what happens when someone answers it properly.
+        </p>
+        <p>
+          A recent engagement — for a regional trade organisation redesigning its RFQ
+          (request-for-quotation) process — moved through all three stages in sequence:
+        </p>
+      </div>
+
+      <div class="stages">
+        <div class="stage">
+          <p class="stage__num">01 — Readiness</p>
+          <h3 class="stage__title">Where do we actually stand?</h3>
+          <p class="stage__desc">A Workforce &amp; AI Readiness Diagnostic and Maturity Scorecard, establishing where the organisation's RFQ process actually stood before recommending anything.</p>
+        </div>
+        <div class="stage">
+          <p class="stage__num">02 — Capability Building</p>
+          <h3 class="stage__title">Can people use it?</h3>
+          <p class="stage__desc">A validated workplace learning implementation roadmap, with 100% of affected staff trained to interpret and deploy it.</p>
+        </div>
+        <div class="stage">
+          <p class="stage__num">03 — Redesign</p>
+          <h3 class="stage__title">Is the job itself right?</h3>
+          <p class="stage__desc">Job roles re-scoped from manual data extraction toward high-value validation and strategic decision-making — validated role documents, with training on the new roles.</p>
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <p class="rule-box__label">How engagements run</p>
+        <p>
+          I lead as project manager and integrator; an HR specialist and an AI engineer cover the
+          specialist work. The rule holds at every layer — AI drafts the diagnostic, the roadmap,
+          and the role descriptions; the people in the room decide what's right for their
+          organisation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLAGSHIP PROGRAMME -->
+  <section class="section reveal" id="programme">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Flagship Case Study</p>
+        <h2>Applied AI for B2B Sales &amp; Account Management</h2>
+        <p>
+          This is what Stage 2 — Capability Building — looks like at full scale: not a single
+          workshop, but a complete programme. Each module targets one task in the sales cycle:
+          AI produces a named first-pass deliverable from the rep's own documents, and the rep
+          applies the judgment checkpoint that only domain experience can make.
+        </p>
+      </div>
+      <p class="prog-meta">
+        Designed by <span>LIVO</span> for <span>SMF Centre for Corporate Learning</span> · <span>9 modules</span> ·
+        <span>63 hours</span> · <span>WSQ-aligned</span> · <span>June 2026</span>
+      </p>
+
+      <div class="track-cols">
+        <div class="track">
+          <p class="track__title">Account Development &amp; Pipeline Intelligence</p>
+          <p class="track__count">5 modules</p>
+          <ul class="track__list">
+            <li><span class="track__num">01</span><span>Prospect Research &amp; Account Prioritisation</span></li>
+            <li><span class="track__num">02</span><span>Lead Qualification &amp; Disqualification Briefing</span></li>
+            <li><span class="track__num">03</span><span>Competitive Intelligence &amp; Battle Card Drafting</span></li>
+            <li><span class="track__num">04</span><span>Account Research &amp; Executive Briefing</span></li>
+            <li><span class="track__num">05</span><span>Pipeline Narrative &amp; CRM Enrichment</span></li>
+          </ul>
+        </div>
+        <div class="track">
+          <p class="track__title">Proposal Excellence &amp; Client Engagement</p>
+          <p class="track__count">4 modules</p>
+          <ul class="track__list">
+            <li><span class="track__num">06</span><span>Proposal &amp; RFP Response Drafting</span></li>
+            <li><span class="track__num">07</span><span>Executive Summary &amp; Value Proposition Writing</span></li>
+            <li><span class="track__num">08</span><span>Meeting Preparation &amp; Discovery Call Brief</span></li>
+            <li><span class="track__num">09</span><span>Account Review &amp; Renewal Briefing</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="eyebrow">Inside a module — two examples</p>
+
+      <div class="module">
+        <div class="module__head">
+          <p class="module__tag">Module 01 · Account Development &amp; Pipeline Intelligence</p>
+          <h3 class="module__title">AI-Augmented Prospect Research &amp; Account Prioritisation</h3>
+          <p class="module__tagline">"Account list uploaded. Signals scored. Priority set."</p>
+        </div>
+        <div class="module__grid">
+          <div class="module__col module__col--ai">
+            <p class="module__col-label">AI drafts</p>
+            <p>Produces a prioritised account ranking with scoring rationale from the uploaded target
+              account list, and flags accounts where incomplete firmographic data is affecting the score.</p>
+          </div>
+          <div class="module__col module__col--human">
+            <p class="module__col-label">You decide</p>
+            <p>Validate where the ranking diverges from commercial intuition, and identify which signal
+              is being over-weighted before committing outreach resources.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module__head">
+          <p class="module__tag">Module 09 · Proposal Excellence &amp; Client Engagement</p>
+          <h3 class="module__title">AI-Augmented Account Review &amp; Renewal Briefing</h3>
+          <p class="module__tagline">"Account history reviewed. Risk surfaced. Renewal positioned."</p>
+        </div>
+        <div class="module__grid">
+          <div class="module__col module__col--ai">
+            <p class="module__col-label">AI drafts</p>
+            <p>A one-page account review brief — renewal risk signals, expansion opportunities, and three
+              recommended next actions — from the uploaded account history or interaction log.</p>
+          </div>
+          <div class="module__col module__col--human">
+            <p class="module__col-label">You decide</p>
+            <p>Identify which recommendation depends on relationship knowledge only the account manager
+              holds, before it goes into the QBR.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="eyebrow" style="margin-top:40px;">Full programme index</p>
+      <div class="index">
+        <div class="index__row is-detailed">
+          <span class="index__num">01</span><span class="index__title">Prospect Research &amp; Account Prioritisation</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">02</span><span class="index__title">Lead Qualification &amp; Disqualification Briefing</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">03</span><span class="index__title">Competitive Intelligence &amp; Battle Card Drafting</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">04</span><span class="index__title">Account Research &amp; Executive Briefing</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">05</span><span class="index__title">Pipeline Narrative &amp; CRM Enrichment</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">06</span><span class="index__title">Proposal &amp; RFP Response Drafting</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">07</span><span class="index__title">Executive Summary &amp; Value Proposition Writing</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row">
+          <span class="index__num">08</span><span class="index__title">Meeting Preparation &amp; Discovery Call Brief</span><span class="index__hours">7 hrs</span>
+        </div>
+        <div class="index__row is-detailed">
+          <span class="index__num">09</span><span class="index__title">Account Review &amp; Renewal Briefing</span><span class="index__hours">7 hrs</span>
+        </div>
+      </div>
+
+      <p class="eyebrow" style="margin-top:40px;">Part of a series</p>
+      <div class="series">
+        <div class="series__item">
+          <p class="series__item-title">Applied AI for B2B Sales &amp; Account Management <span class="series__tag">— this programme</span></p>
+        </div>
+        <div class="series__item">
+          <p class="series__item-title">Applied AI for Product Development &amp; Innovation</p>
+          <p class="series__item-desc">A practitioner-focused track helping product teams identify high-impact AI use cases and apply AI across ideation, validation, prototyping and scaling — same draft-and-checkpoint model, applied to product workflows instead of sales workflows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section class="section reveal" id="credentials">
+    <div class="container">
+      <div class="section__head">
+        <p class="eyebrow">Credentials &amp; Partners</p>
+        <h2>Formalising practice already underway.</h2>
+        <p>The work above is already happening. These are the credentials catching up to it.</p>
+      </div>
+
+      <div class="cred-block">
+        <p class="cred-block__label">Currently completing</p>
+        <div class="cred-item">
+          <p class="cred-item__title">WSQ Diploma in Design and Development of Learning for Performance 2.0 (DDDLP 2.0)<span class="cred-item__status">In Progress</span></p>
+          <p class="cred-item__meta">Institute for Adult Learning (IAL), Singapore — the SkillsFuture Singapore (SSG)-recognised
+            qualification for designing and developing WSQ-certifiable courses. The credential for
+            Stage 2 — Capability Building — and the standard the flagship programme above is built to.</p>
+        </div>
+      </div>
+
+      <div class="cred-block">
+        <p class="cred-block__label">Next</p>
+        <div class="cred-item">
+          <p class="cred-item__title">Graduate Certificate in Workplace Learning (or equivalent)<span class="cred-item__status">Planned</span></p>
+          <p class="cred-item__meta">A postgraduate, consultancy-project-based programme in cross-boundary change and workplace
+            redesign. The credential for Stage 3 — Redesign — formalising work like the engagement
+            described above.</p>
+        </div>
+      </div>
+
+      <div class="cred-block">
+        <p class="cred-block__label">Certifications</p>
+        <div class="pill-row">
+          <span class="pill">IBM Cloud Computing Practitioner · 2023</span>
+          <span class="pill">IBM AI &amp; Data Science Practitioner · 2023</span>
+          <span class="pill">Power BI Data Analysis &amp; Reporting · 2025</span>
+          <span class="pill">MEDDIC</span>
+          <span class="pill">SPIN Selling</span>
+          <span class="pill">Strategic Value Selling</span>
+        </div>
+      </div>
+
+      <div class="cred-block">
+        <p class="cred-block__label">Programme &amp; training partners</p>
+        <div class="pill-row">
+          <span class="pill">Singapore Manufacturing Federation (SMF) — Centre for Corporate Learning</span>
+          <span class="pill">Workforce Singapore (WSG)</span>
+          <span class="pill">e2i</span>
+          <span class="pill">Singapore Polytechnics</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact reveal" id="contact">
+    <div class="container">
+      <p class="eyebrow">Work With Me</p>
+      <h2>Building toward ten organisations — readiness to redesign.</h2>
+      <p>
+        Without losing the judgment that makes their teams good at their jobs. I'm working with a
+        small number of organisations on exactly this — typically starting with a Workforce &amp;
+        AI Readiness Diagnostic, the same starting point as the engagement described above, with an
+        HR specialist and an AI engineer brought in as the work requires.
+      </p>
+      <div class="btn-row" style="margin-bottom:48px;">
+        <a class="btn btn--primary" href="mailto:jonathan.singapore@gmail.com">Start a conversation</a>
+      </div>
+      <dl class="contact-grid">
+        <div>
+          <dt>Email</dt>
+          <dd><a href="mailto:jonathan.singapore@gmail.com">jonathan.singapore@gmail.com</a></dd>
+        </div>
+        <div>
+          <dt>Phone</dt>
+          <dd><a href="tel:+6597266058">+65 9726 6058</a></dd>
+        </div>
+        <div>
+          <dt>LinkedIn</dt>
+          <dd><a href="https://linkedin.com/in/jonathanwsl" target="_blank" rel="noopener">linkedin.com/in/jonathanwsl</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <span>Jonathan Wong · Singapore</span>
+  <span>AI Transformation Consulting — Readiness to Redesign</span>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    reveals.forEach(el => el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
